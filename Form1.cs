@@ -31,7 +31,7 @@ namespace MemoryConsumptionTest
         {
             Process currentProcess = Process.GetCurrentProcess();
             long usedMemory = currentProcess.PrivateMemorySize64;
-            //currentMemoryUsage = usedMemory;
+            
             AppMemoryUsage = usedMemory;
             //label2.Text = "Applicatiom: "+ usedMemory.ToString();
 
@@ -43,7 +43,7 @@ namespace MemoryConsumptionTest
             }
             currentProcess = Process.GetCurrentProcess();
             usedMemory = currentProcess.PrivateMemorySize64;
-            //usedMemory = usedMemory;
+
             currentMemoryUsage = usedMemory - AppMemoryUsage;
             label3.Text = "String: " + currentMemoryUsage.ToString() + " bytes";
         }
@@ -54,16 +54,15 @@ namespace MemoryConsumptionTest
         private void TestStringBuilderConsumption()
         {
             Process currentProcess = Process.GetCurrentProcess();
-            //long usedMemory = currentProcess.PrivateMemorySize64;
-
-            //label2.Text = usedMemory.ToString();
-
+ 
+            // ChatGTP solution
             StringBuilder sb = new StringBuilder();
             sb.Append("a");
             for (int i = 1; i < 10000; i++)
             {
                 sb.Append(i).Append("b"); // Append to one string
             }
+            //
             currentProcess = Process.GetCurrentProcess();
             long usedMemory = currentProcess.PrivateMemorySize64  - currentMemoryUsage - AppMemoryUsage;
             label4.Text = "StringBuilder: " + usedMemory.ToString() + " bytes";
